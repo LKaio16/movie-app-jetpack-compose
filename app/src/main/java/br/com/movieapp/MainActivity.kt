@@ -1,5 +1,6 @@
 package br.com.movieapp
 
+import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -11,7 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import br.com.movieapp.ui.theme.MovieAppTheme
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
+import timber.log.Timber
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     val apiKey = BuildConfig.API_KEY
@@ -42,5 +47,15 @@ fun Greeting(name: String) {
 fun DefaultPreview() {
     MovieAppTheme {
         Greeting("Android")
+    }
+}
+
+@HiltAndroidApp
+class MovieApp : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        if (BuildConfig.DEBUG){
+            Timber.plant(Timber.DebugTree())
+        }
     }
 }
