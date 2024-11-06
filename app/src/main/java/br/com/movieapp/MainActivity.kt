@@ -49,13 +49,3 @@ fun DefaultPreview() {
         Greeting("Android")
     }
 }
-
-@HiltAndroidApp
-class MovieApp : Application() {
-    override fun onCreate() {
-        super.onCreate()
-        if (BuildConfig.DEBUG){
-            Timber.plant(Timber.DebugTree())
-        }
-    }
-}
